@@ -1,0 +1,32 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+      - dev
+jobs:
+  test:
+    environment: development
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+      - name: build project
+        run: npm run build
+      - name: setup aws configurations
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-south-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: deploy to s3
+        run: aws s3 sync ./dist/. s3://chamara-demo-s3-bucket-02
+          
+
