@@ -21,12 +21,12 @@ jobs:
         run: echo ${{ secrets.TEST }}
       - name: build project
         run: npm run build
-      - name: setup aws configurations
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.ROLE }}
-        #   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+      # - name: setup aws configurations
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     role-to-assume: ${{ secrets.ROLE }}
+      #     aws-region: ap-south-1
+      #   #   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: deploy to s3
         run: aws s3 sync ./dist/. s3://chamara-demo-s3-bucket-02
           
