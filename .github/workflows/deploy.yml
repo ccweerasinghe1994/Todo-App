@@ -19,8 +19,8 @@ jobs:
         run: npm ci
       - name: build project
         run: npm run build
-      - name: setup aws configurations
-        uses: aws-actions/configure-aws-credentials@v1
+      # - name: setup aws configurations
+      #   uses: aws-actions/configure-aws-credentials@v1
         # with:
         #   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         #   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
