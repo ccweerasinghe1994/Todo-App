@@ -19,8 +19,6 @@ Resources:
         Statement:
           - Action:
             - 's3:GetObject'
-            - 's3:PutObject'
-            - 's3:DeleteObject'
             Effect: Allow
             Resource: !Join
               - ''
@@ -28,6 +26,9 @@ Resources:
                 - !Ref WebSite
                 - /*
             Principal: '*'
-# Outputs:
-#   WebsiteURL:
-#     Value: !Join ['', ['http://', !Ref WebSite, '.s3-website-', !Ref 'AWS::Region', '.amazonaws.com']]
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - WebSite
+      - WebsiteURL
+    Description: URL for website hosted on S3
