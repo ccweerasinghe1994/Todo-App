@@ -26,3 +26,5 @@ Resources:
                 - !Ref WebSite
                 - /*
             Principal: "*"
+Outputs:
+  websiteUrl: !Join 
