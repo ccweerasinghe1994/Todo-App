@@ -19,6 +19,9 @@ Resources:
         Statement:
           - Action:
               - "s3:GetObject"
+              - "s3:PutObject"
+              - "s3:DeleteObject"
+              - "s3:ListBucket"
             Effect: Allow
             Resource: !Join
               - ""
@@ -27,4 +30,5 @@ Resources:
                 - /*
             Principal: "*"
 Outputs:
-  websiteUrl: !Join 
+  WebsiteURL:
+    Value: !Join ['', ['http://', !Ref WebSite, '.s3-website-', !Ref 'AWS::Region', '.amazonaws.com']]
