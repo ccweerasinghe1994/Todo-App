@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: cloudformation template to create a s3 bucket which will host the website
+Description: this is a test template to create a s3 bucket
 
 Resources:
   WebSite:
@@ -9,8 +9,8 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-
-  BucketPolicy:
+      
+  SampleBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
       Bucket: !Ref WebSite
@@ -18,17 +18,16 @@ Resources:
         Version: 2012-10-17
         Statement:
           - Action:
-              - "s3:GetObject"
-              - "s3:PutObject"
-              - "s3:DeleteObject"
-              - "s3:ListBucket"
+            - 's3:GetObject'
+            - 's3:PutObject'
+            - 's3:DeleteObject'
             Effect: Allow
             Resource: !Join
-              - ""
-              - - "arn:aws:s3:::"
+              - ''
+              - - 'arn:aws:s3:::'
                 - !Ref WebSite
                 - /*
-            Principal: "*"
-Outputs:
-  WebsiteURL:
-    Value: !Join ['', ['http://', !Ref WebSite, '.s3-website-', !Ref 'AWS::Region', '.amazonaws.com']]
+            Principal: '*'
+# Outputs:
+#   WebsiteURL:
+#     Value: !Join ['', ['http://', !Ref WebSite, '.s3-website-', !Ref 'AWS::Region', '.amazonaws.com']]
