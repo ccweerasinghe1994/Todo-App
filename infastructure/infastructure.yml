@@ -26,6 +26,31 @@ Resources:
                 - !Ref WebSite
                 - /*
             Principal: '*'
+# cloud front part is not working 
+  TodoAppCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          # CachePolicyId: 
+          Compress: false
+          DefaultTTL: 86400
+          # FieldLevelEncryptionId: 
+          MaxTTL: 31536000
+          MinTTL: 0
+          # OriginRequestPolicyId: 
+          # RealtimeLogConfigArn: 
+          # ResponseHeadersPolicyId: 
+          SmoothStreaming: false
+          TargetOriginId: WebSite
+          ViewerProtocolPolicy: allow-all
+          # ViewerProtocolPolicy: 
+        # DefaultRootObject: 
+        Enabled: false
+        HttpVersion: http1.1
+        PriceClass: PriceClass_All
+        # WebACLId: 
+
 Outputs:
   WebsiteURL:
     Value: !GetAtt
